@@ -2,7 +2,7 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:show, :edit, :update, :destroy]
 
   def index
-    @students = Student.all
+    @students = policy_scope(Student)
   end
 
   def show
@@ -10,11 +10,13 @@ class StudentsController < ApplicationController
 
   def new
     @student =  Student.new
+    authorize @student
   end
 
   def create
     @student = Student.new(student_params)
     @student.user = current_user
+    authorize @student
     if @student.save
       redirect_to student_path(@student)
     else
@@ -42,6 +44,7 @@ class StudentsController < ApplicationController
 
   def set_student
     @student = Student.find(params[:id])
+    authorize @student
   end
 
   def student_params

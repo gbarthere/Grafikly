@@ -18,6 +18,7 @@ gem 'uglifier'
 gem 'webpacker'
 
 gem 'omniauth-facebook'
+gem "pundit"
 
 group :development do
   gem 'web-console', '>= 3.3.0'
